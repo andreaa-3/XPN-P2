@@ -1,0 +1,17 @@
+# Application configuration
+spring:
+  application:
+    name: example
+  datasource:
+    url: jdbc:postgresql://localhost:5432/xpn
+    username: xpn
+    password: xpn
+
+# Server configuration
+server:
+  port: 8080
+
+# API documentation with Swagger
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
