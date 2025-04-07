@@ -9,22 +9,27 @@ public class ProductMapper {
         ProductDto productDto = new ProductDto();
 
         productDto.setId(product.getId());
+        productDto.setSKU(product.getSKU());
         productDto.setName(product.getName());
-        productDto.setDescription(product.getDescription());
-        productDto.setPrice(product.getPrice());
-        productDto.setStock(product.getStock());
+        productDto.setTipo(product.getName());
+        productDto.setCantidad(product.getStock());
+        productDto.setAlmacen(product.getAlmacen().toString());
+        productDto.setProveedor(product.getProveedor());
 
         return productDto;
     }
 
+    // Para producto nuevo
     public static Product dtoToEntity(ProductDto productDto) {
         Product product = new Product();
 
         product.setId(productDto.getId());
+        product.setSKU(productDto.getSKU());
         product.setName(productDto.getName());
-        product.setDescription(productDto.getDescription());
-        product.setPrice(productDto.getPrice());
-        product.setStock(productDto.getStock());
+        product.setTipo(productDto.getTipo());
+        product.setStock(productDto.getCantidad());
+        product.setAlmacen(productDto.getAlmacen()); // poner a almacen
+        product.setProveedor(productDto.getProveedor());
 
         return product;
     }

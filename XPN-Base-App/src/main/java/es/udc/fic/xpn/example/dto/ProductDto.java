@@ -1,23 +1,25 @@
 package es.udc.fic.xpn.example.dto;
 
 public class ProductDto {
-
     private Long id;
+    private Long SKU;
     private String name;
-    private String description;
-    private Double price;
-
-    private Integer stock;
+    private String tipo;
+    private String cantidad;
+    private String almacen;
+    private String proveedor;
 
     public ProductDto() {
     }
 
-    public ProductDto(Long id, String name, String description, Double price, Integer stock) {
+    public ProductDto(Long id, Long SKU, String name, String tipo, String cantidad, String almacen, String proveedor) {
         this.id = id;
+        this.SKU = SKU;
         this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stock = stock;
+        this.tipo = tipo;
+        this.cantidad = cantidad;
+        this.almacen = almacen;
+        this.proveedor = proveedor;
     }
 
     public Long getId() {
@@ -28,6 +30,14 @@ public class ProductDto {
         this.id = id;
     }
 
+    public Long getSKU() {
+        return SKU;
+    }
+
+    public void setSKU(Long SKU) {
+        this.SKU = SKU;
+    }
+
     public String getName() {
         return name;
     }
@@ -36,38 +46,47 @@ public class ProductDto {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public Double getPrice() {
-        return price;
+    public String getCantidad() {
+        return cantidad;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public Integer getStock() {
-        return stock;
+    public String getAlmacen() {
+        return almacen;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setAlmacen(String almacen) {
+        this.almacen = almacen;
     }
 
-    @Override
-    public String toString() {
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    @java.lang.Override
+    public java.lang.String toString() {
         return "ProductDto{" +
-                "id=" + id +
+                "SKU=" + SKU +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price + "\n" +
-                ", stock=" + stock +
+                ", tipo='" + tipo + '\'' +
+                ", cantidad='" + cantidad + '\'' +
+                ", almacen='" + almacen + '\'' +
+                ", proveedor='" + proveedor + '\'' +
                 '}';
     }
 }

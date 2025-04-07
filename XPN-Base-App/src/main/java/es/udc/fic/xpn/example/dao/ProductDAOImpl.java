@@ -21,25 +21,6 @@ public class ProductDAOImpl implements ProductDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Long save2(Product product) {
-        String sql = "INSERT INTO product (name, description, price, stock) VALUES (?, ?, ?, ?)";
-
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-
-        jdbcTemplate.update(con -> {
-                    PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
-                    ps.setString(1, product.getName());
-                    ps.setString(2, product.getDescription());
-                    ps.setDouble(3, product.getPrice());
-                    ps.setInt(4, product.getStock());
-
-                    return ps;
-                },
-                keyHolder);
-
-        return keyHolder.getKey().longValue();
-    }
-
     @Override
     public Long save(Product product) {
 
@@ -58,6 +39,7 @@ public class ProductDAOImpl implements ProductDAO {
         return keyHolder.getKey().longValue();
     }
 
+    /*
     @Override
     public Optional<Product> find(Long id) {
 
@@ -70,12 +52,40 @@ public class ProductDAOImpl implements ProductDAO {
             return Optional.empty();
         }
     }
+     */
+    @Override
+    public Optional<Product> find(Long sku) {
 
+        String sql = "SELECT id, name, description, price, stock FROM product WHERE SKU = ?";
+
+        try {
+            Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), sku);
+            return Optional.ofNullable(product);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Long> findByCity (String city, Long SKU) {
+
+        String sql = "SELECT stock FROM product WHERE almacen = ? AND SKU = ?";
+
+        try {
+            Long stock = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), city, sku);
+            return Optional.ofNullable(stock);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
+    /*
     @Override
     public List<Product> findAll() {
         String sql = "SELECT id, name, description, price, stock FROM product";
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
+     */
 
     @Override
     public void update(Product product) {

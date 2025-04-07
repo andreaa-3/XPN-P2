@@ -26,6 +26,7 @@ public class ProductController {
                 productService.create(ProductMapper.dtoToEntity(productDto)));
     }
 
+
     @GetMapping
     public List<ProductDto> findAll() {
         List<Product> products = productService.findAll();
@@ -33,6 +34,7 @@ public class ProductController {
         return products.stream().map(ProductMapper::entityToDto).
                 collect(Collectors.toList());
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> findById(@PathVariable Long id) {

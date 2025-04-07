@@ -3,21 +3,28 @@ package es.udc.fic.xpn.example.model;
 import java.util.Objects;
 
 public class Product {
+    private enum Almacen {
+        CORUÑA, LUGO, OURENSE, PONTEVEDRA
+    }
 
     private Long id;
+    private String SKU; // Código alfanumérico que identifica al producto.
     private String name;
-    private String description;
-    private Double price;
-    private Integer stock;
+    private String tipo;
+    private Almacen almacen;
+    private String proveedor;
+    private Long stock;
 
     public Product() {
     }
 
-    public Product(Long id, String name, String description, Double price, Integer stock) {
+    public Product (Long id, String SKU, String name, String tipo, Almacen almacen, String proveedor, Long stock) {
         this.id = id;
+        this.SKU = SKU;
         this.name = name;
-        this.description = description;
-        this.price = price;
+        this.tipo = tipo;
+        this.almacen = almacen;
+        this.proveedor = proveedor;
         this.stock = stock;
     }
 
@@ -29,6 +36,14 @@ public class Product {
         this.id = id;
     }
 
+    public String getSKU() {
+        return SKU;
+    }
+
+    public void setSKU(String SKU) {
+        this.SKU = SKU;
+    }
+
     public String getName() {
         return name;
     }
@@ -37,37 +52,47 @@ public class Product {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public Double getPrice() {
-        return price;
+    public Almacen getAlmacen() {
+        return almacen;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setAlmacen(Almacen almacen) {
+        this.almacen = almacen;
     }
 
-    public Integer getStock() {
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public Long getStock() {
         return stock;
     }
 
-    public void setStock(Integer stock) {
+    public void setStock(Long stock) {
         this.stock = stock;
     }
 
-    @Override
-    public String toString() {
-        return "ProductDto{" +
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "Product{" +
                 "id=" + id +
+                ", SKU='" + SKU + '\'' +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", almacen=" + almacen.toString() + '\'' +
+                ", proveedor='" + proveedor + '\'' +
                 ", stock=" + stock +
                 '}';
     }
@@ -77,11 +102,16 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(price, product.price) && Objects.equals(stock, product.stock);
+        return Objects.equals(id, product.id) &&
+                Objects.equals(SKU, product.SKU) &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(tipo, product.tipo) &&
+                Objects.equals(almacen, product.almacen) &&
+                Objects.equals(proveedor, product.proveedor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, price, stock);
+        return Objects.hash(id, SKU, name, tipo, stock, almacen, proveedor);
     }
 }
