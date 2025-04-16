@@ -35,7 +35,7 @@ public class ProductController {
                 collect(Collectors.toList());
     }
 
-
+    // miservidor/1
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
         Optional<Product> product = productService.find(id);
@@ -68,4 +68,18 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-}
+    @GetMapping("/{sku}")
+    public List<String> findDestinations (@PathVariable Long SKU) {
+        //getBySKU () ->  Lista<Product>
+        // movidas de comprobar vacío
+        // todo OK -> recorres la lista y miras los stocks
+        // return lista ordenada por menor a myor stock
+    }
+
+    @PostMapping
+    public ProductDto updateStock (@RequestBody ProductDto productDto) {
+        // Get sku saber si existe
+        // Si no existe -> crear
+        // Si existe -> update
+    }
+ }

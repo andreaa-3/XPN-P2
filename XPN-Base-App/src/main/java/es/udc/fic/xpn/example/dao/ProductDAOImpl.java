@@ -79,13 +79,12 @@ public class ProductDAOImpl implements ProductDAO {
         }
     }
 
-    /*
+
     @Override
     public List<Product> findAll() {
         String sql = "SELECT id, name, description, price, stock FROM product";
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
-     */
 
     @Override
     public void update(Product product) {
@@ -93,8 +92,7 @@ public class ProductDAOImpl implements ProductDAO {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate =
                 new NamedParameterJdbcTemplate(jdbcTemplate);
 
-        String sql = "UPDATE product SET name = :name, description = :description, " +
-                "price = :price, stock = :stock WHERE id = :id;";
+        String sql = "UPDATE product SET stock = :stock WHERE id = :id;";
 
         namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(product));
 

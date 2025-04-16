@@ -12,7 +12,7 @@ public interface ProductDAO {
         public Optional<Product> find(Long SKU);
         public Optional<Long> findByCity(String city, Long SKU);
 
-        //public List<Product> findAll();
+        public List<Product> findAll();
 
         public void update(Product product);
 
