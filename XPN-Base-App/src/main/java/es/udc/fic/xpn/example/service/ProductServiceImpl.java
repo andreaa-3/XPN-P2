@@ -22,26 +22,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> find(Long id) {
-        return productDAO.find(id);
+    public Optional<Product> findById(Long id) {
+        return productDAO.findById(id);
     }
 
     @Override
-    public List<Product> findAll() {
-        return productDAO.findAll();
+    public Optional<Product> findBySkuCity(String city, String sku) {
+        return productDAO.findBySkuCity(city, sku);
+    }
+
+    @Override
+    public List<Product> findBySku(String sku) {
+        return productDAO.findBySku(sku);
     }
 
     @Override
     public void update(Product product) {
         productDAO.update(product);
     }
-
-
-    @Override
-    public void delete(Long id) {
-        if (! productDAO.find(id).isEmpty())
-            productDAO.delete(id);
-    }
-
-
 }

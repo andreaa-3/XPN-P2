@@ -11,75 +11,66 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("products")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @PostMapping
-    public ProductDto create(@RequestBody ProductDto productDto) {
-        return ProductMapper.entityToDto(
-                productService.create(ProductMapper.dtoToEntity(productDto)));
-    }
-
-
+    /*
     @GetMapping
-    public List<ProductDto> findAll() {
+    private List<ProductDto> findAll() {
         List<Product> products = productService.findAll();
 
         return products.stream().map(ProductMapper::entityToDto).
                 collect(Collectors.toList());
     }
-
-    // miservidor/1
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
-        Optional<Product> product = productService.find(id);
-
-        if (product.isPresent())
-            return new ResponseEntity<>(
-                    ProductMapper.entityToDto(product.get()), HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @PutMapping
-    public ResponseEntity<Void> update(@RequestBody ProductDto productDto) {
-        if (productService.find(productDto.getId()).isPresent()) {
-
-            productService.update(ProductMapper.dtoToEntity(productDto));
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (productService.find(id).isPresent()) {
-            productService.delete(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    */
 
     @GetMapping("/{sku}")
-    public List<String> findDestinations (@PathVariable Long SKU) {
+    public List<String> findDestinations (@PathVariable String sku) {
         //getBySKU () ->  Lista<Product>
         // movidas de comprobar vacío
         // todo OK -> recorres la lista y miras los stocks
         // return lista ordenada por menor a myor stock
+        return null;
+    }
+
+
+    //@PostMapping
+    private ResponseEntity<Void> create(ProductDto productDto) {
+        // Crear el producto
+        productService.create(ProductMapper.dtoToEntity(productDto));
+
+        // Devolver el código 201 (Created)
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    
+
+    //@PutMapping
+    private ResponseEntity<Void> update(/*@RequestBody*/ Product product) {
+        if (productService.findById(product.getId()).isPresent()) {
+            productService.update(product);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
-    public ProductDto updateStock (@RequestBody ProductDto productDto) {
-        // Get sku saber si existe
-        // Si no existe -> crear
-        // Si existe -> update
+    public ResponseEntity<Void> updateStock (@RequestBody ProductDto productDto) {
+        // Buscar si el producto existe en el almacen a través del SKU
+        Optional<Product> product = productService.findBySkuCity(productDto.getAlmacen(), productDto.getSku());
+
+        // Si no existe, se crea
+        if (!product.isPresent())
+            return create(productDto);
+
+        // Si existe, se actualiza el stock.
+        Product p = product.get();
+
+        p.setStock(p.getStock() + productDto.getCantidad());
+        return update(p);
     }
  }

@@ -2,24 +2,28 @@ package es.udc.fic.xpn.example.dto;
 
 public class ProductDto {
     private Long id;
-    private Long SKU;
+    private String sku;
     private String name;
     private String tipo;
-    private String cantidad;
     private String almacen;
     private String proveedor;
+    private Long cantidad;
+    private Long maxStock;
+    private Long minStock;
 
     public ProductDto() {
     }
 
-    public ProductDto(Long id, Long SKU, String name, String tipo, String cantidad, String almacen, String proveedor) {
+    public ProductDto(Long id, String sku, String name, String tipo, String almacen, String proveedor, Long cantidad, Long maxStock, Long minStock) {
         this.id = id;
-        this.SKU = SKU;
+        this.sku = sku;
         this.name = name;
         this.tipo = tipo;
-        this.cantidad = cantidad;
         this.almacen = almacen;
         this.proveedor = proveedor;
+        this.cantidad = cantidad;
+        this.maxStock = maxStock;
+        this.minStock = minStock;
     }
 
     public Long getId() {
@@ -30,12 +34,12 @@ public class ProductDto {
         this.id = id;
     }
 
-    public Long getSKU() {
-        return SKU;
+    public String getSku() {
+        return sku;
     }
 
-    public void setSKU(Long SKU) {
-        this.SKU = SKU;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public String getName() {
@@ -54,11 +58,11 @@ public class ProductDto {
         this.tipo = tipo;
     }
 
-    public String getCantidad() {
+    public Long getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -78,15 +82,34 @@ public class ProductDto {
         this.proveedor = proveedor;
     }
 
+    public Long getMaxStock() {
+        return maxStock;
+    }
+
+    public void setMaxStock(Long maxStock) {
+        this.maxStock = maxStock;
+    }
+
+    public Long getMinStock() {
+        return minStock;
+    }
+
+    public void setMinStock(Long minStock) {
+        this.minStock = minStock;
+    }
+
     @java.lang.Override
     public java.lang.String toString() {
         return "ProductDto{" +
-                "SKU=" + SKU +
+                "id=" + id +
+                ", sku=" + sku +
                 ", name='" + name + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", cantidad='" + cantidad + '\'' +
                 ", almacen='" + almacen + '\'' +
                 ", proveedor='" + proveedor + '\'' +
+                ", maxStock=" + maxStock +
+                ", minStock=" + minStock +
                 '}';
     }
 }

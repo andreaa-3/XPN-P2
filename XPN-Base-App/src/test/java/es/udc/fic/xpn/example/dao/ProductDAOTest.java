@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Optional;
 
 @SpringBootTest
@@ -15,14 +17,12 @@ public class ProductDAOTest {
 
     @Test
     public void save() {
-
-        Product p = new Product(1L, "Mouse", "A nice mouse", 50.0, 10);
+        Product p = new Product(1L, "1234", "SillaToGuapa", "Silla", "Lugo", "Ikea", 50L);
         p.setId(productDAO.save(p));
 
-        Optional<Product> res = productDAO.find(p.getId());
-        assert(! res.isEmpty());
-
+        Optional<Product> res = productDAO.findBySkuCity("1234", "Lugo");
+        assertEquals(p, res);
+        
         productDAO.delete(p.getId());
-
     }
 }

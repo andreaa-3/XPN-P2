@@ -6,30 +6,32 @@ import es.udc.fic.xpn.example.model.Product;
 public class ProductMapper {
 
     public static ProductDto entityToDto(Product product) {
-        ProductDto productDto = new ProductDto();
-
-        productDto.setId(product.getId());
-        productDto.setSKU(product.getSKU());
-        productDto.setName(product.getName());
-        productDto.setTipo(product.getName());
-        productDto.setCantidad(product.getStock());
-        productDto.setAlmacen(product.getAlmacen().toString());
-        productDto.setProveedor(product.getProveedor());
+        ProductDto productDto = new ProductDto(
+            product.getId(),
+            product.getSku(),
+            product.getName(),
+            product.getTipo(),
+            product.getAlmacen(),
+            product.getProveedor(),
+            product.getStock(),
+            product.getMaxStock(),
+            product.getMinStock()
+        );
 
         return productDto;
     }
 
     // Para producto nuevo
     public static Product dtoToEntity(ProductDto productDto) {
-        Product product = new Product();
-
-        product.setId(productDto.getId());
-        product.setSKU(productDto.getSKU());
-        product.setName(productDto.getName());
-        product.setTipo(productDto.getTipo());
-        product.setStock(productDto.getCantidad());
-        product.setAlmacen(productDto.getAlmacen()); // poner a almacen
-        product.setProveedor(productDto.getProveedor());
+        Product product = new Product(
+                productDto.getId(),
+                productDto.getSku(),
+                productDto.getName(),
+                productDto.getTipo(),
+                productDto.getProveedor(),
+                productDto.getAlmacen(),
+                productDto.getCantidad()
+        );
 
         return product;
     }

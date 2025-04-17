@@ -9,13 +9,17 @@ import java.sql.SQLException;
 public class ProductRowMapper implements RowMapper<Product> {
 
     public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Product p = new Product();
-        p.setId(rs.getLong("id"));
-        p.setName(rs.getString("name"));
-        p.setDescription(rs.getString("description"));
-        p.setPrice(rs.getDouble("price"));
-        p.setStock(rs.getInt("stock"));
-
+        Product p = new Product(
+            rs.getLong("id"),
+            rs.getString("sku"),
+            rs.getString("name"),
+            rs.getString("tipo"),
+            rs.getString("almacen"),
+            rs.getString("proveedor"),
+            rs.getLong("stock"),
+            rs.getLong("maxStock"),
+            rs.getLong("minStock")
+        );
         return p;
     }
 }

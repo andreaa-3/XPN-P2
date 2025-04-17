@@ -27,8 +27,8 @@ public class ProductDAOImpl implements ProductDAO {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate =
                 new NamedParameterJdbcTemplate(jdbcTemplate);
 
-        String sql = "INSERT INTO product (name, description, price, stock) " +
-                "VALUES (:name, :description, :price, :stock)";
+        String sql = "INSERT INTO product (sku, name, tipo, almacen, proveedor, stock, maxStock, minStock) " +
+                "VALUES (:sku, :name, :tipo, :almacen, :proveedor, :stock, :maxStock, :minStock)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -53,13 +53,22 @@ public class ProductDAOImpl implements ProductDAO {
         }
     }
      */
+    
+     /*
     @Override
-    public Optional<Product> find(Long sku) {
+    public List<Product> findAll() {
+        String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock FROM product";
+        return jdbcTemplate.query(sql, new ProductRowMapper());
+    }
+    */
 
-        String sql = "SELECT id, name, description, price, stock FROM product WHERE SKU = ?";
+
+    @Override
+    public Optional<Product> findById (Long id) {
+        String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock FROM product WHERE almacen = ? AND id = ?";
 
         try {
-            Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), sku);
+            Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), id);
             return Optional.ofNullable(product);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -67,22 +76,21 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public Optional<Long> findByCity (String city, Long SKU) {
-
-        String sql = "SELECT stock FROM product WHERE almacen = ? AND SKU = ?";
+    public Optional<Product> findBySkuCity (String city, String sku) {
+        String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock FROM product WHERE almacen = ? AND sku = ?";
 
         try {
-            Long stock = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), city, sku);
-            return Optional.ofNullable(stock);
+            Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), city, sku);
+            return Optional.ofNullable(product);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
 
-
     @Override
-    public List<Product> findAll() {
-        String sql = "SELECT id, name, description, price, stock FROM product";
+    public List<Product> findBySku(String sku) {
+        String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock FROM product WHERE SKU = ?";
+
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
 
@@ -92,16 +100,14 @@ public class ProductDAOImpl implements ProductDAO {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate =
                 new NamedParameterJdbcTemplate(jdbcTemplate);
 
-        String sql = "UPDATE product SET stock = :stock WHERE id = :id;";
+        String sql = "UPDATE product SET stock = :stock WHERE sku = :sku AND almacen = :almacen;";
 
         namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(product));
-
     }
 
     @Override
     public void delete(Long id) {
         String sql = "DELETE FROM product WHERE id = ?";
         jdbcTemplate.update(sql, id);
-
     }
 }

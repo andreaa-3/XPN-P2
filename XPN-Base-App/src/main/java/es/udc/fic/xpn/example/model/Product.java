@@ -2,30 +2,45 @@ package es.udc.fic.xpn.example.model;
 
 import java.util.Objects;
 
-public class Product {
-    private enum Almacen {
-        CORUÑA, LUGO, OURENSE, PONTEVEDRA
-    }
+import static es.udc.fic.xpn.example.model.ModelConstants.MAX_STOCK_BY_DEFECT;
+import static es.udc.fic.xpn.example.model.ModelConstants.MIN_STOCK_BY_DEFECT;
 
+public class Product {
     private Long id;
-    private String SKU; // Código alfanumérico que identifica al producto.
+    private String sku; // Código alfanumérico que identifica al producto.
     private String name;
     private String tipo;
-    private Almacen almacen;
+    private String almacen;
     private String proveedor;
     private Long stock;
+    private Long maxStock;
+    private Long minStock;
 
     public Product() {
     }
 
-    public Product (Long id, String SKU, String name, String tipo, Almacen almacen, String proveedor, Long stock) {
+    public Product(Long id, String sku, String name, String tipo, String almacen, String proveedor, Long stock, Long maxStock, Long minStock) {
         this.id = id;
-        this.SKU = SKU;
+        this.sku = sku;
         this.name = name;
         this.tipo = tipo;
         this.almacen = almacen;
         this.proveedor = proveedor;
         this.stock = stock;
+        this.maxStock = maxStock;
+        this.minStock = minStock;
+    }
+
+    public Product(Long id, String sku, String name, String tipo, String almacen, String proveedor, Long stock) {
+        this.id = id;
+        this.sku = sku;
+        this.name = name;
+        this.tipo = tipo;
+        this.almacen = almacen;
+        this.proveedor = proveedor;
+        this.stock = stock;
+        this.maxStock = MAX_STOCK_BY_DEFECT;
+        this.minStock = MIN_STOCK_BY_DEFECT;
     }
 
     public Long getId() {
@@ -36,12 +51,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getSKU() {
-        return SKU;
+    public String getSku() {
+        return sku;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public String getName() {
@@ -60,11 +75,11 @@ public class Product {
         this.tipo = tipo;
     }
 
-    public Almacen getAlmacen() {
+    public String getAlmacen() {
         return almacen;
     }
 
-    public void setAlmacen(Almacen almacen) {
+    public void setAlmacen(String almacen) {
         this.almacen = almacen;
     }
 
@@ -84,16 +99,34 @@ public class Product {
         this.stock = stock;
     }
 
+    public Long getMaxStock() {
+        return maxStock;
+    }
+
+    public void setMaxStock(Long maxStock) {
+        this.maxStock = maxStock;
+    }
+
+    public Long getMinStock() {
+        return minStock;
+    }
+
+    public void setMinStock(Long minStock) {
+        this.minStock = minStock;
+    }
+
     @java.lang.Override
     public java.lang.String toString() {
         return "Product{" +
                 "id=" + id +
-                ", SKU='" + SKU + '\'' +
+                ", SKU='" + sku + '\'' +
                 ", name='" + name + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", almacen=" + almacen.toString() + '\'' +
                 ", proveedor='" + proveedor + '\'' +
-                ", stock=" + stock +
+                ", stock='" + stock + '\'' +
+                ", maxStock='" + maxStock + '\'' +
+                ", minStock='" + minStock +
                 '}';
     }
 
@@ -102,16 +135,16 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(SKU, product.SKU) &&
+        return Objects.equals(sku, product.sku) &&
                 Objects.equals(name, product.name) &&
                 Objects.equals(tipo, product.tipo) &&
                 Objects.equals(almacen, product.almacen) &&
-                Objects.equals(proveedor, product.proveedor);
+                Objects.equals(proveedor, product.proveedor) &&
+                Objects.equals(stock, product.stock);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, SKU, name, tipo, stock, almacen, proveedor);
+        return Objects.hash(id, sku, name, tipo, stock, almacen, proveedor);
     }
 }

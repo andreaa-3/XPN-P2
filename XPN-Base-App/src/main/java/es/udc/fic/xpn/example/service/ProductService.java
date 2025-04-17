@@ -9,12 +9,11 @@ public interface ProductService {
 
     public Product create(Product product);
 
-    public Optional<Product> find(Long id);
+    public Optional<Product> findById(Long id);
 
-    public List<Product> findAll();
+    public Optional<Product> findBySkuCity(String city, String sku);
 
+    public List<Product> findBySku(String sku);
+    
     public void update(Product product);
-
-    public void delete(Long id);
-
 }
