@@ -39,12 +39,13 @@ public class ProductController {
 
         // Comprobar si la lista no está vacía
         if (products == null || products.isEmpty()){
-            throw new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return null;
         }
 
         // Devuelve la lista ordenada por menor a mayor stock
         return products.stream().sorted(Comparator.comparing(Product::getStock)).map(Product::getAlmacen).toList();
     }
+
 
 
     //@PostMapping
