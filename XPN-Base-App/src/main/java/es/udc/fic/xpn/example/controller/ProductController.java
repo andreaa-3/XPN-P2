@@ -34,14 +34,15 @@ public class ProductController {
 
     @GetMapping("/{sku}")
     public List<String> findDestinations (@PathVariable String sku) {
-        //getBySKU () ->  Lista<Product>
+        // Obtener la lista de productos con ese SKU
         List<Product> products = productService.findBySku(sku);
-        // movidas de comprobar vacío
-        if(products == null || products.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontraron almacenes para el producto " + sku);
+
+        // Comprobar si la lista no está vacía
+        if (products == null || products.isEmpty()){
+            throw new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        // todo OK -> recorres la lista y miras los stocks
-        // return lista ordenada por menor a myor stock
+
+        // Devuelve la lista ordenada por menor a mayor stock
         return products.stream().sorted(Comparator.comparing(Product::getStock)).map(Product::getAlmacen).toList();
     }
 

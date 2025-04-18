@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: es.udc.fic.xpn.example.dao.ProductDAOTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 7.687 s <<< FAILURE! -- in es.udc.fic.xpn.example.dao.ProductDAOTest
-es.udc.fic.xpn.example.dao.ProductDAOTest.save -- Time elapsed: 1.616 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 8.570 s <<< FAILURE! -- in es.udc.fic.xpn.example.dao.ProductDAOTest
+es.udc.fic.xpn.example.dao.ProductDAOTest.save -- Time elapsed: 1.763 s <<< ERROR!
 org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [INSERT INTO product (sku, name, tipo, almacen, proveedor, stock, maxStock, minStock) VALUES (?, ?, ?, ?, ?, ?, ?, ?)]
 	at org.springframework.jdbc.support.SQLStateSQLExceptionTranslator.doTranslate(SQLStateSQLExceptionTranslator.java:112)
 	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107)
