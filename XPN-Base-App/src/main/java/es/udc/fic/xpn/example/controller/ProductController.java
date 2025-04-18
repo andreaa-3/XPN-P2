@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Comparator;
 
 @RestController
 @RequestMapping("/products")
@@ -32,10 +35,14 @@ public class ProductController {
     @GetMapping("/{sku}")
     public List<String> findDestinations (@PathVariable String sku) {
         //getBySKU () ->  Lista<Product>
+        List<Product> products = productService.findBySku(sku);
         // movidas de comprobar vacío
+        if(products == null || products.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontraron almacenes para el producto " + sku);
+        }
         // todo OK -> recorres la lista y miras los stocks
         // return lista ordenada por menor a myor stock
-        return null;
+        return products.stream().sorted(Comparator.comparing(Product::getStock)).map(Product::getAlmacen).toList();
     }
 
 
