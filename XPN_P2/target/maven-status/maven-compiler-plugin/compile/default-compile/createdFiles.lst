@@ -1,0 +1,11 @@
+es\udc\fic\xpn\app\Application.class
+es\udc\fic\xpn\app\model\ModelConstants.class
+es\udc\fic\xpn\app\model\Product.class
+es\udc\fic\xpn\app\controller\ProductController.class
+es\udc\fic\xpn\app\mapper\ProductMapper.class
+es\udc\fic\xpn\app\service\ProductServiceImpl.class
+es\udc\fic\xpn\app\dao\ProductDAO.class
+es\udc\fic\xpn\app\dto\ProductRowMapper.class
+es\udc\fic\xpn\app\service\ProductService.class
+es\udc\fic\xpn\app\dao\ProductDAOImpl.class
+es\udc\fic\xpn\app\dto\ProductDto.class
