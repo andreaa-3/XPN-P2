@@ -32,18 +32,23 @@ public class ProductController {
     }
     */
 
-    @GetMapping("/{sku}")
-    public List<String> findDestinations (@PathVariable String sku) {
-        // Obtener la lista de productos con ese SKU
+    @GetMapping("/findDestinations")
+    public String findDestinations (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen ) {
+        //getBySKU () ->  Lista<Product>
         List<Product> products = productService.findBySku(sku);
-
-        // Comprobar si la lista no está vacía
-        if (products == null || products.isEmpty()){
+        // movidas de comprobar vacío
+        if(products == null || products.isEmpty()){
             return null;
         }
+        // todo OK -> recorres la lista y miras los stocks
+        // return lista ordenada por menor a myor stock
+        List<String> almacenes = products.stream().sorted(Comparator.comparing(Product::getStock)).map(Product::getAlmacen).toList();
 
-        // Devuelve la lista ordenada por menor a mayor stock
-        return products.stream().sorted(Comparator.comparing(Product::getStock)).map(Product::getAlmacen).toList();
+        if(almacenes.get(0) == almacen){
+            return almacenes.get(1);
+        }
+
+        return almacenes.get(0);
     }
 
 

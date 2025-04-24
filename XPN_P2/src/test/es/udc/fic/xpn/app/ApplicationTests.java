@@ -10,4 +10,9 @@ class ApplicationTests {
 	void contextLoads() {
 	}
 
+	// Buscar no insertado.
+	// Verificar que lo devuelve ordenado con solo 1 almacen.
+	// Verificar que lo devuelve ordenado con varios.
+	// Update stock no existe.
+	// Update existe y ver que se actualiza.
 }
