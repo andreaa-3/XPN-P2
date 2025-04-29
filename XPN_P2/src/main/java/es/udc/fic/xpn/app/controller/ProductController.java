@@ -33,7 +33,7 @@ public class ProductController {
     */
 
     @GetMapping("/findDestinations")
-    public String findDestinations (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen ) {
+    public String findDestinations (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
         //getBySKU () ->  Lista<Product>
         List<Product> products = productService.findBySku(sku);
         // movidas de comprobar vacío
@@ -52,26 +52,20 @@ public class ProductController {
     }
 
 
-    private ResponseEntity<Void> create(ProductDto productDto) {
+    private ProductDto create(ProductDto productDto) {
         // Crear el producto
-        productService.create(ProductMapper.dtoToEntity(productDto));
-
-        // Devolver el código 201 (Created)
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ProductMapper.entityToDto(
+                productService.create(ProductMapper.dtoToEntity(productDto)));
     }
     
 
-    private ResponseEntity<Void> update(Product product) {
-        if (productService.findById(product.getId()).isPresent()) {
-            productService.update(product);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    private void update(Product product) {
+        // Se sobreentiende que si se encontró por el findBySku, existe.
+        return productService.update(product);
     }
 
     @PostMapping
-    public ResponseEntity<Void> updateStock (@RequestBody ProductDto productDto) {
+    public void updateStock (@RequestBody ProductDto productDto) {
         // Buscar si el producto existe en el almacen a través del SKU
         Optional<Product> product = productService.findBySkuCity(productDto.getAlmacen(), productDto.getSku());
 
@@ -84,5 +78,34 @@ public class ProductController {
 
         p.setStock(p.getStock() + productDto.getCantidad());
         return update(p);
+    }
+
+    @GetMapping("/superaStock")
+    boolean superaStock (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
+        return comprobaciónStock(sku, almacen, true);
+    }
+
+    @GetMapping("/faltaStock")
+    boolean faltaStock (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
+        return comprobaciónStock(sku, almacen, false);
+    }
+
+    boolean comprobaciónStock (String sku, String almacen, bool max) {
+        Optional<Product> product = productService.findBySkuCity(almacen, sku);
+
+        // Si no existe, es error
+        if (!product.isPresent())
+            return false;
+
+        // Si existe, obtiene el producto
+        Product p = product.get();
+
+        // Devuelve la comparación del stock
+        if max {
+            return p.getStock() > p.getMaxStock();
+        }
+        else {
+            return p.getStock() < p.getMinStock();
+        }
     }
  }
