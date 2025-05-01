@@ -9,8 +9,6 @@ public interface ProductService {
 
     public Product create(Product product);
 
-    public Optional<Product> findById(Long id);
-
     public Optional<Product> findBySkuCity(String city, String sku);
 
     public List<Product> findBySku(String sku);

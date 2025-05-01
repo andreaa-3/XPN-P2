@@ -23,11 +23,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
-        return productDAO.findById(id);
-    }
-
-    @Override
     public Optional<Product> findBySkuCity(String city, String sku) {
         return productDAO.findBySkuCity(city, sku);
     }

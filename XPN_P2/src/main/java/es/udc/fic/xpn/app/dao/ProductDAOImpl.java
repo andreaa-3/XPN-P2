@@ -39,42 +39,6 @@ public class ProductDAOImpl implements ProductDAO {
         return keyHolder.getKey().longValue();
     }
 
-    /*
-    @Override
-    public Optional<Product> find(Long id) {
-
-        String sql = "SELECT id, name, description, price, stock FROM product WHERE id = ?";
-
-        try {
-            Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), id);
-            return Optional.ofNullable(product);
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
-    }
-     */
-    
-
-    /*
-    @Override
-    public List<Product> findAll() {
-        String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock FROM Product";
-        return jdbcTemplate.query(sql, new ProductRowMapper());
-    }*/
-
-
-    @Override
-    public Optional<Product> findById (Long id) {
-        String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock, maxStock, minStock FROM product WHERE id = ?";
-
-        try {
-            Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), id);
-            return Optional.ofNullable(product);
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
-    }
-
     @Override
     public Optional<Product> findBySkuCity (String city, String sku) {
         String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock, maxStock, minStock FROM product WHERE almacen = ? AND sku = ?";

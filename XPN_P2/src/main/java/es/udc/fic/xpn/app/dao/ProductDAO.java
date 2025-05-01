@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface ProductDAO {
         public Long save(Product product);
-        public Optional<Product> findById(Long id);
         public Optional<Product> findBySkuCity(String city, String sku);
         public List<Product> findBySku(String sku);
         public void update(Product product);
