@@ -11,11 +11,8 @@ public class ProductMapper {
             product.getSku(),
             product.getName(),
             product.getTipo(),
-            product.getAlmacen(),
             product.getProveedor(),
-            product.getStock(),
-            product.getMaxStock(),
-            product.getMinStock()
+            product.getCantidad()
         );
 
         return productDto;
@@ -24,10 +21,10 @@ public class ProductMapper {
     // Para producto nuevo
     public static Product dtoToEntity(ProductDto productDto) {
         Product product = new Product(
+                productDto.getId(),
                 productDto.getSku(),
                 productDto.getName(),
                 productDto.getTipo(),
-                productDto.getAlmacen(),
                 productDto.getProveedor(),
                 productDto.getCantidad()
         );

@@ -3,13 +3,14 @@ package es.udc.fic.xpn.app.controller;
 import es.udc.fic.xpn.app.dto.ProductDto;
 import es.udc.fic.xpn.app.mapper.ProductMapper;
 import es.udc.fic.xpn.app.model.Product;
+import es.udc.fic.xpn.app.model.Stock;
 import es.udc.fic.xpn.app.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,7 @@ public class ProductController {
         }
         // todo OK -> recorres la lista y miras los stocks
         // return lista ordenada por menor a myor stock
-        List<String> almacenes = products.stream().sorted(Comparator.comparing(Product::getStock)).map(Product::getAlmacen).toList();
+        List<String> almacenes = products.stream().sorted(Comparator.comparing(Stock::getStock)).map(Product::getAlmacen).toList();
 
         if(almacenes.get(0) == almacen){
             return almacenes.get(1);
