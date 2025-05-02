@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-
     public Product create(Product product);
 
     public Optional<Product> findBySkuCity(String city, String sku);

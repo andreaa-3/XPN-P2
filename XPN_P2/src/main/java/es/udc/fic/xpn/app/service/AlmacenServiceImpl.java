@@ -12,7 +12,7 @@ public class AlmacenServiceImpl implements AlmacenService {
     private AlmacenDAO almacenDAO;
     
     @Override
-    public Long save(Almacen almacen) {
+    public Almacen save(Almacen almacen) {
         Long id = almacenDAO.save(almacen);
         almacen.setId(id);
         return id;

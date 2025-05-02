@@ -12,10 +12,10 @@ public class StockServiceImpl implements StockService {
     private StockDAO stockDAO;
     
     @Override
-    public Long save(Stock stock) {
+    public Stock save(Stock stock) {
         Long id = stockDAO.save(stock);
         stock.setId(id);
-        return id;
+        return stock;
     }
 
     @Override
