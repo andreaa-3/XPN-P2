@@ -164,8 +164,6 @@ public class ProductController {
 
         // Devolver la comparación del stock
         boolean result = max ? stock.isOverStock() : stock.isUnderStock();
-        System.out.println("STOCK: " + stock.getStock() + " MAX: " + stock.getMaxStock() + " S>MAX: " + stock.isOverStock());
-        System.out.println("STOCK: " + stock.getStock() + " MIN: " + stock.getMinStock() + " S>MIN: " + stock.isUnderStock());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
