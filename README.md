@@ -118,14 +118,33 @@ Acceder a la documentación de la API poniendo en un navegador la siguiente URL 
 
 Revisar los logs en el archivo: logs/app.log
 
+## Ejecución del proyecto en Bonita
 
-## Itegración con Bonita
+Pasos para desplegar y ejecutar el proceso BPM en Bonita Community Edition.
 
-La aplicación Spring Boot está diseñada para ser consumida por procesos definidos en Bonita Community Edition 2024.3. Bonita se conecta a los endpoints REST expuestos por esta API para:
+**1. Importar el proyecto en Bonita Studio**
 
-- Actualizar el stock de un producto en un almacen, creándolo si no existe.
-- Consultar si el stock de un producto en un almacen supera el máximo stock establecido.
-- Consultar si el stock de un producto en un almacen está por debajo el mínimo stock establecido.
-- Obtener el destino más favorable para transferir un producto.
-- Obtener un ID autogenerado para una órden de transferencia.
-- Obtener un ID autogenerado para una órden de abastecimiento.
+Una vez abierto Bonita Studio, acceder a Archivo > Importar un proyecto, seleccionar el archivo del proyecto .bos proporcionado y siguir las instrucciones para importar.
+
+**2. Desplegar el proceso**
+
+Tras importar, abrir el diagrama del proceso y hacer click en la opción de Desplegar de la barra superior para subir el proceso al motor de Bonita.
+
+**3. Ejecutar el proceso**
+
+Al pinchar en ejecutar se inicia una nueva instancia del proceso.
+
+**Usuarios de prueba**
+
+- Empleado (actor walter.bates)
+  Usuario: walter.bates
+  Contraseña: bpm
+  
+- Responsable de almacén (actor april.sanchez)
+  Usuario: april.sanchez
+  Contraseña: bpm
+
+**Nota**
+El API REST del sistema SPR (la aplicación Spring Boot) debe estar corriendo en http://localhost:8080 para que Bonita pueda realizar las peticiones necesarias.
+
+
