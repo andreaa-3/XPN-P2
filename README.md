@@ -1,6 +1,6 @@
 # XPN Base App
 
-Este proyecto es una aplicación desarrollada con Spring Boot. Emplea PostgreSQL como sistema gestor de base de datos y expone una API REST documentada mediante Swagger UI.
+Este proyecto es una aplicación desarrollada en lenguaje Java con Spring Boot. Emplea PostgreSQL como sistema gestor de base de datos y expone una API REST documentada mediante Swagger UI.
 
 ## Estructura del proyecto
 
