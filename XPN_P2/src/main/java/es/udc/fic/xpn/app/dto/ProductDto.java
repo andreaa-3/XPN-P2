@@ -5,20 +5,39 @@ public class ProductDto {
     private String sku;
     private String name;
     private String tipo;
+    private String almacen;
     private String proveedor;
     private Long cantidad;
-  
 
     public ProductDto() {
+        // Necesario para que Jackson pueda crear instancias
+    }
+    
+    public ProductDto(Long id, String sku, String name, String tipo, String almacen, String proveedor, Long cantidad) {
+        this.id = id;
+        this.sku = sku;
+        this.name = name;
+        this.tipo = tipo;
+        this.almacen = almacen;
+        this.proveedor = proveedor;
+        this.cantidad = cantidad;
     }
 
-    public ProductDto(Long id, String sku, String name, String tipo, String proveedor, Long cantidad) {
+    public ProductDto(String sku, String name, String tipo, String almacen, String proveedor, Long cantidad) {
+        this.sku = sku;
+        this.name = name;
+        this.tipo = tipo;
+        this.almacen = almacen;
+        this.proveedor = proveedor;
+        this.cantidad = cantidad;
+    }
+
+    public ProductDto(Long id, String sku, String name, String tipo, String proveedor) {
         this.id = id;
         this.sku = sku;
         this.name = name;
         this.tipo = tipo;
         this.proveedor = proveedor;
-        this.cantidad = cantidad;
     }
 
     public Long getId() {
@@ -61,6 +80,13 @@ public class ProductDto {
         this.cantidad = cantidad;
     }
 
+    public String getAlmacen() {
+        return almacen;
+    }
+
+    public void setAlmacen(String almacen) {
+        this.almacen = almacen;
+    }
 
     public String getProveedor() {
         return proveedor;
@@ -70,7 +96,6 @@ public class ProductDto {
         this.proveedor = proveedor;
     }
 
-    
     @java.lang.Override
     public java.lang.String toString() {
         return "ProductDto{" +
@@ -79,6 +104,7 @@ public class ProductDto {
                 ", name='" + name + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", cantidad='" + cantidad + '\'' +
+                ", almacen='" + almacen + '\'' +
                 ", proveedor='" + proveedor + '\'' +
                 '}';
     }

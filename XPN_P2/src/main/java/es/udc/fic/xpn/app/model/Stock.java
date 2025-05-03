@@ -88,4 +88,12 @@ public class Stock {
                 '}';
     }
 
+    public boolean isOverStock() {
+        return stock > maxStock;
+    }
+    
+    public boolean isUnderStock() {
+        return stock < minStock;
+    }    
+
 }

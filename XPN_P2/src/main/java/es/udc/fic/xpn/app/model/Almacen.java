@@ -4,6 +4,9 @@ public class Almacen{
     private Long id;
     private String nombre;
 
+    public Almacen(){
+    }
+
     public Almacen(String nombre){
         this.nombre = nombre;
     }

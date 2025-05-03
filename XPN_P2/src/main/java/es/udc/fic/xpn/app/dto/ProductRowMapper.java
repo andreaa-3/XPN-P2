@@ -14,8 +14,7 @@ public class ProductRowMapper implements RowMapper<Product> {
             rs.getString("sku"),
             rs.getString("name"),
             rs.getString("tipo"),
-            rs.getString("proveedor"),
-            rs.getLong("cantidad")
+            rs.getString("proveedor")
         );
         return p;
     }

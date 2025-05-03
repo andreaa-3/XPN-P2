@@ -12,7 +12,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -27,8 +26,8 @@ public class ProductDAOImpl implements ProductDAO {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate =
                 new NamedParameterJdbcTemplate(jdbcTemplate);
 
-        String sql = "INSERT INTO product (sku, name, tipo, almacen, proveedor, stock, maxStock, minStock) " +
-                "VALUES (:sku, :name, :tipo, :almacen, :proveedor, :stock, :maxStock, :minStock)";
+        String sql = "INSERT INTO product (sku, name, tipo, proveedor) " +
+                "VALUES (:sku, :name, :tipo, :proveedor)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -40,33 +39,15 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public Optional<Product> findBySkuCity (String city, String sku) {
-        String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock, maxStock, minStock FROM product WHERE almacen = ? AND sku = ?";
+    public Optional<Product> find (String sku) {
+        String sql = "SELECT id, sku, name, tipo, proveedor FROM product WHERE sku = ?";
 
         try {
-            Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), city, sku);
+            Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), sku);
             return Optional.ofNullable(product);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
-    }
-
-    @Override
-    public List<Product> findBySku(String sku) {
-        String sql = "SELECT id, sku, name, tipo, almacen, proveedor, stock, maxStock, minStock FROM product WHERE sku = ?";
-
-        return jdbcTemplate.query(sql, new ProductRowMapper(), sku);
-    }
-
-    @Override
-    public void update(Product product) {
-
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate =
-                new NamedParameterJdbcTemplate(jdbcTemplate);
-
-        String sql = "UPDATE product SET stock = :stock WHERE sku = :sku AND almacen = :almacen;";
-
-        namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(product));
     }
 
     @Override

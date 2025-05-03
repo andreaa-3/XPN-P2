@@ -6,7 +6,6 @@ import es.udc.fic.xpn.app.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,17 +21,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findBySkuCity(String city, String sku) {
-        return productDAO.findBySkuCity(city, sku);
+    public Optional<Product> find(String sku) {
+        return productDAO.find(sku);
     }
 
     @Override
-    public List<Product> findBySku(String sku) {
-        return productDAO.findBySku(sku);
-    }
-
-    @Override
-    public void update(Product product) {
-        productDAO.update(product);
+    public void delete(Long id) {
+        productDAO.delete(id);
     }
 }

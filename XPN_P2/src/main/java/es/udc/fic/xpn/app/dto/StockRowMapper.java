@@ -12,12 +12,11 @@ public class StockRowMapper implements RowMapper<Stock>{
         Stock s = new Stock(
             rs.getLong("id"),
             rs.getLong("stock"),
-            rs.getLong("minStock"),
             rs.getLong("maxStock"),
+            rs.getLong("minStock"),
             rs.getLong("idAlmacen"),
             rs.getLong("idProducto")
         );
         return s;
     }
-    
 }

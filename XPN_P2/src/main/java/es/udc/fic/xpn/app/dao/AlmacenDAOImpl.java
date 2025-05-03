@@ -37,13 +37,24 @@ public class AlmacenDAOImpl implements AlmacenDAO{
         return keyHolder.getKey().longValue();
     }
 
-     @Override
+    @Override
     public Optional<Almacen> find(String nombre) {
-
         String sql = "SELECT id, nombre FROM almacen WHERE nombre = ?";
 
         try {
             Almacen almacen = jdbcTemplate.queryForObject(sql, new AlmacenRowMapper(), nombre);
+            return Optional.ofNullable(almacen);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Almacen> findById(Long id) {
+        String sql = "SELECT id, nombre FROM almacen WHERE nombre = ?";
+
+        try {
+            Almacen almacen = jdbcTemplate.queryForObject(sql, new AlmacenRowMapper(), id);
             return Optional.ofNullable(almacen);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();

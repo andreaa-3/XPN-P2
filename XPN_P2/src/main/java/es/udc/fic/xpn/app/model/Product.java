@@ -10,18 +10,23 @@ public class Product {
     private String name;
     private String tipo;
     private String proveedor;
-    private Long cantidad;
 
-    public Product() {
+    public Product () {
     }
 
-    public Product(Long id, String sku, String name, String tipo, String proveedor, Long cantidad) {
+    public Product(Long id, String sku, String name, String tipo, String proveedor) {
         this.id = id;
         this.sku = sku;
         this.name = name;
         this.tipo = tipo;
         this.proveedor = proveedor;
-        this.cantidad = cantidad;
+    }
+
+    public Product(String sku, String name, String tipo, String proveedor) {
+        this.sku = sku;
+        this.name = name;
+        this.tipo = tipo;
+        this.proveedor = proveedor;
     }
 
     public Long getId() {
@@ -64,15 +69,6 @@ public class Product {
         this.proveedor = proveedor;
     }
 
-    public Long getCantidad(){
-        return this.cantidad;
-    }
-
-    public void setCantidad(Long cantidad){
-        this.cantidad = cantidad;
-    }
-    
-
     @java.lang.Override
     public java.lang.String toString() {
         return "Product{" +
@@ -81,7 +77,6 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", proveedor='" + proveedor + '\'' +
-                ", cantidad='" + cantidad + '\'' +
                 '}';
     }
 
