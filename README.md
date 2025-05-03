@@ -62,8 +62,7 @@ src/
   - Contraseña: `xpn`
   - Puerto: 5432
 - Puerto `8080` libre para poder la ejecutar la aplicación.
-- Existir el script SQL `create-schema.sql` en `src/main/resources` y estar correctamente configurado en el plugin Maven SQL.
-- Acceso a servidor de correo SMTP.
+- Servidor de correo SMTP corriendo en el puerto `2550`.
 - Disponer de Bonita Community Edition 2024.3
 
 ## Dependencias principales
@@ -129,4 +128,4 @@ La aplicación Spring Boot está diseñada para ser consumida por procesos defin
 - Consultar si el stock de un producto en un almacen está por debajo el mínimo stock establecido.
 - Obtener el destino más favorable para transferir un producto.
 - Obtener un ID autogenerado para una órden de transferencia.
-- Obtener un id autogenerado para una órden de abastecimiento.
+- Obtener un ID autogenerado para una órden de abastecimiento.
