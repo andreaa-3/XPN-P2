@@ -26,8 +26,8 @@ public class ProductDAOImpl implements ProductDAO {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate =
                 new NamedParameterJdbcTemplate(jdbcTemplate);
 
-        String sql = "INSERT INTO product (sku, name, tipo, proveedor) " +
-                "VALUES (:sku, :name, :tipo, :proveedor)";
+        String sql = "INSERT INTO product (sku, nombre, tipo, proveedor) " +
+                "VALUES (:sku, :nombre, :tipo, :proveedor)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -40,7 +40,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public Optional<Product> find (String sku) {
-        String sql = "SELECT id, sku, name, tipo, proveedor FROM product WHERE sku = ?";
+        String sql = "SELECT id, sku, nombre, tipo, proveedor FROM product WHERE sku = ?";
 
         try {
             Product product = jdbcTemplate.queryForObject(sql, new ProductRowMapper(), sku);

@@ -18,8 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 
 @RestController
@@ -165,5 +167,20 @@ public class ProductController {
         // Devolver la comparación del stock
         boolean result = max ? stock.isOverStock() : stock.isUnderStock();
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    private static String getCurrentTimestampAsString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        return sdf.format(new Date());
+    }
+
+    @GetMapping("/idTransferencia")
+    public String createIdTrasferencia () {
+        return getCurrentTimestampAsString();
+    }
+
+    @GetMapping("/idAbastecimiento")
+    public String createIdAbastecimiento () {
+        return getCurrentTimestampAsString();
     }
 }

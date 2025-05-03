@@ -7,24 +7,24 @@ import java.util.Objects;
 public class Product {
     private Long id;
     private String sku; // Código alfanumérico que identifica al producto.
-    private String name;
+    private String nombre;
     private String tipo;
     private String proveedor;
 
     public Product () {
     }
 
-    public Product(Long id, String sku, String name, String tipo, String proveedor) {
+    public Product(Long id, String sku, String nombre, String tipo, String proveedor) {
         this.id = id;
         this.sku = sku;
-        this.name = name;
+        this.nombre = nombre;
         this.tipo = tipo;
         this.proveedor = proveedor;
     }
 
-    public Product(String sku, String name, String tipo, String proveedor) {
+    public Product(String sku, String nombre, String tipo, String proveedor) {
         this.sku = sku;
-        this.name = name;
+        this.nombre = nombre;
         this.tipo = tipo;
         this.proveedor = proveedor;
     }
@@ -45,12 +45,12 @@ public class Product {
         this.sku = sku;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTipo() {
@@ -74,7 +74,7 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", SKU='" + sku + '\'' +
-                ", name='" + name + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", proveedor='" + proveedor + '\'' +
                 '}';
@@ -86,13 +86,13 @@ public class Product {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return Objects.equals(sku, product.sku) &&
-                Objects.equals(name, product.name) &&
+                Objects.equals(nombre, product.nombre) &&
                 Objects.equals(tipo, product.tipo) &&
                 Objects.equals(proveedor, product.proveedor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sku, name, tipo, proveedor);
+        return Objects.hash(id, sku, nombre, tipo, proveedor);
     }
 }

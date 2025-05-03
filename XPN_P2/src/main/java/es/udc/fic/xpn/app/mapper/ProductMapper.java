@@ -9,7 +9,7 @@ public class ProductMapper {
         ProductDto productDto = new ProductDto(
             product.getId(),
             product.getSku(),
-            product.getName(),
+            product.getNombre(),
             product.getTipo(),
             product.getProveedor()
         );
@@ -21,7 +21,7 @@ public class ProductMapper {
     public static Product dtoToEntity(ProductDto productDto) {
         Product product = new Product(
                 productDto.getSku(),
-                productDto.getName(),
+                productDto.getNombre(),
                 productDto.getTipo(),
                 productDto.getProveedor()
         );

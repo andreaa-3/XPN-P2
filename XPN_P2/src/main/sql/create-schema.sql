@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS Product;
 CREATE TABLE Product (
     id SERIAL PRIMARY KEY,
     sku VARCHAR(256),
-    name VARCHAR(256),
+    nombre VARCHAR(256),
     tipo VARCHAR(256),
     proveedor VARCHAR(256)
 );

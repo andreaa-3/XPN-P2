@@ -33,7 +33,7 @@ public class ProductDAOTest {
         Product p = result.get();
         assertEquals(product.getId(), p.getId());
         assertEquals(product.getSku(), p.getSku());
-        assertEquals(product.getName(), p.getName());
+        assertEquals(product.getNombre(), p.getNombre());
         assertEquals(product.getTipo(), p.getTipo());
         assertEquals(product.getProveedor(), p.getProveedor());
 

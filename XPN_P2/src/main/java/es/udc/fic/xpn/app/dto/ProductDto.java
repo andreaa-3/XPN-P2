@@ -3,7 +3,7 @@ package es.udc.fic.xpn.app.dto;
 public class ProductDto {
     private Long id;
     private String sku;
-    private String name;
+    private String nombre;
     private String tipo;
     private String almacen;
     private String proveedor;
@@ -13,29 +13,29 @@ public class ProductDto {
         // Necesario para que Jackson pueda crear instancias
     }
     
-    public ProductDto(Long id, String sku, String name, String tipo, String almacen, String proveedor, Long cantidad) {
+    public ProductDto(Long id, String sku, String nombre, String tipo, String almacen, String proveedor, Long cantidad) {
         this.id = id;
         this.sku = sku;
-        this.name = name;
+        this.nombre = nombre;
         this.tipo = tipo;
         this.almacen = almacen;
         this.proveedor = proveedor;
         this.cantidad = cantidad;
     }
 
-    public ProductDto(String sku, String name, String tipo, String almacen, String proveedor, Long cantidad) {
+    public ProductDto(String sku, String nombre, String tipo, String almacen, String proveedor, Long cantidad) {
         this.sku = sku;
-        this.name = name;
+        this.nombre = nombre;
         this.tipo = tipo;
         this.almacen = almacen;
         this.proveedor = proveedor;
         this.cantidad = cantidad;
     }
 
-    public ProductDto(Long id, String sku, String name, String tipo, String proveedor) {
+    public ProductDto(Long id, String sku, String nombre, String tipo, String proveedor) {
         this.id = id;
         this.sku = sku;
-        this.name = name;
+        this.nombre = nombre;
         this.tipo = tipo;
         this.proveedor = proveedor;
     }
@@ -56,12 +56,12 @@ public class ProductDto {
         this.sku = sku;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTipo() {
@@ -101,7 +101,7 @@ public class ProductDto {
         return "ProductDto{" +
                 "id=" + id +
                 ", sku=" + sku +
-                ", name='" + name + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", cantidad='" + cantidad + '\'' +
                 ", almacen='" + almacen + '\'' +

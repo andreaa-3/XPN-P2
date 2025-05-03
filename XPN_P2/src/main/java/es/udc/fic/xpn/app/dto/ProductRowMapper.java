@@ -12,7 +12,7 @@ public class ProductRowMapper implements RowMapper<Product> {
         Product p = new Product(
             rs.getLong("id"),
             rs.getString("sku"),
-            rs.getString("name"),
+            rs.getString("nombre"),
             rs.getString("tipo"),
             rs.getString("proveedor")
         );
