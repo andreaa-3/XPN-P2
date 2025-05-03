@@ -116,7 +116,7 @@ mvn spring-boot:run
 
 Acceder a la documentación de la API poniendo en un navegador la siguiente URL http://localhost:8080/swagger-ui.html
 
-Revisar los logs en el archivo: logs/app.log
+Revisar los logs en el archivo: `logs/app.log`
 
 ## Ejecución del proyecto en Bonita
 
