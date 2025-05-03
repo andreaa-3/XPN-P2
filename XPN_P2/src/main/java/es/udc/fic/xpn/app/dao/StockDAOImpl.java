@@ -58,9 +58,9 @@ public class StockDAOImpl implements StockDAO {
             return Optional.empty();
         }
     }
-
+    
     public List<Stock> findStocks(Long idProducto) {
-        String sql = "SELECT id, idProducto, idAlmacen, stock, maxStock, minStock FROM product WHERE idProducto = ?";
+        String sql = "SELECT id, idProducto, idAlmacen, stock, maxStock, minStock FROM stock WHERE idProducto = ?";
         
         return jdbcTemplate.query(sql, new StockRowMapper(), idProducto);
     }

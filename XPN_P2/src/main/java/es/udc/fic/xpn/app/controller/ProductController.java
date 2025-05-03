@@ -35,7 +35,7 @@ public class ProductController {
     @Autowired
     private StockService stockService;
 
-    public ResponseEntity<String> obtenerNombre(Long idAlmacen) {
+    private ResponseEntity<String> obtenerNombre(Long idAlmacen) {
         Optional<Almacen> a = almacenService.findById(idAlmacen);
         if (!a.isPresent())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imposible obtener el nombre de almacén");

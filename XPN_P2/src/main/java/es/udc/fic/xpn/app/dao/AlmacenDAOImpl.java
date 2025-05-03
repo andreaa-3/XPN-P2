@@ -51,7 +51,7 @@ public class AlmacenDAOImpl implements AlmacenDAO{
 
     @Override
     public Optional<Almacen> findById(Long id) {
-        String sql = "SELECT id, nombre FROM almacen WHERE nombre = ?";
+        String sql = "SELECT id, nombre FROM almacen WHERE id = ?";
 
         try {
             Almacen almacen = jdbcTemplate.queryForObject(sql, new AlmacenRowMapper(), id);
