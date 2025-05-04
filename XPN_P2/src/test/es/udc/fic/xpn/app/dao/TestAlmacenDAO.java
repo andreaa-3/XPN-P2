@@ -11,7 +11,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class AlmacenDAOTest {
+class TestAlmacenDAO {
 
     @Autowired
     private AlmacenDAO almacenDAO;

@@ -87,13 +87,4 @@ public class Stock {
                 ", idProducto= "+ idProducto +
                 '}';
     }
-
-    public boolean isOverStock() {
-        return stock > maxStock;
-    }
-    
-    public boolean isUnderStock() {
-        return stock < minStock;
-    }    
-
 }

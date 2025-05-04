@@ -31,4 +31,9 @@ CREATE TABLE Stock (
     CONSTRAINT uq_stock_producto_almacen UNIQUE (idProducto, idAlmacen)
 );
 
---INSERT INTO Product VALUES (1000, '1234', 'Prueba', 'TipoPrueba', 'AlmacenPrueba', 'ProveedorPrueba', 50, 2, 1);
+INSERT INTO Almacen (nombre) VALUES 
+('A Coruña'),
+('Lugo'),
+('Santiago'),
+('Pontevedra'),
+('Ourense');

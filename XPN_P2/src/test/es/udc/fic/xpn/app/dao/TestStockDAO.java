@@ -15,7 +15,7 @@ import static es.udc.fic.xpn.app.model.ModelConstants.MAX_STOCK_BY_DEFECT;
 import static es.udc.fic.xpn.app.model.ModelConstants.MIN_STOCK_BY_DEFECT;
 
 @SpringBootTest
-class StockDAOTest {
+class TestStockDAO {
 
     @Autowired
     private StockDAO stockDAO;

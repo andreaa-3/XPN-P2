@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Optional;
 
 @SpringBootTest
-public class ProductDAOTest {
+public class TestProductDAO {
     @Autowired
     private ProductDAO productDAO;
 

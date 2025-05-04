@@ -135,17 +135,22 @@ public class ProductController {
         return update(s.get(), productDto.getCantidad());
     }
 
-    @GetMapping("/overStock")
+    @GetMapping("/actualStock")
+    public ResponseEntity<?> actualStock (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
+        return getStock(sku, almacen, false, false);
+    }
+
+    @GetMapping("/maxStock")
     public ResponseEntity<?> overStock (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
-        return checkStock(sku, almacen, true);
+        return getStock(sku, almacen, true, false);
     }
 
-    @GetMapping("/underStock")
+    @GetMapping("/minStock")
     public ResponseEntity<?> underStock (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
-        return checkStock(sku, almacen, false);
+        return getStock(sku, almacen, false, true);
     }
 
-    private ResponseEntity<?> checkStock (String sku, String almacen, boolean max) {
+    private ResponseEntity<?> getStock (String sku, String almacen, boolean max, boolean min) {
         // Obtener el producto por SKU (para saber si id).
         Optional<Product> p = productService.find(sku);
         if (!p.isPresent())
@@ -164,8 +169,12 @@ public class ProductController {
         // Si existe, obtener el stock.
         Stock stock = s.get();
 
-        // Devolver la comparación del stock
-        boolean result = max ? stock.isOverStock() : stock.isUnderStock();
+        // Devolver el stock correspondiente.
+        Long result;
+        if (max) result = stock.getMaxStock();
+        else if (min) result = stock.getMinStock();
+        else result = stock.getStock();
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
