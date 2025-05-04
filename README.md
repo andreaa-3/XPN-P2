@@ -54,7 +54,7 @@ src/
 - README.md -> Documentación del proyecto.
 - ER_XPN_P2.svg -> Diagrama del modelo entidad-relación de la base de datos.
 - XPN_2024_25_C2_P2.pdf -> Enunciado de la práctica.
-- XPN_P2_GrupoXX.bos -> Proyecto de Bonita.
+- XPN_P2_Grupo02.bos -> Proyecto de Bonita.
 
 ## Requisitos previos
 
