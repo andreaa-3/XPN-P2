@@ -5,6 +5,11 @@ La aplicación ha sido desarrollada como un sistema de Gestión de Almacén para
 - El proceso de negocio ha sido modelado y automatizado en la plataforma Bonita Community Edition 2024.3. Realiza peticiones a la API REST expuesta por el  Sistema de Planificación de Recursos (SPR) y al servidor SMTP para enviar notificaciones por correo electrónico.
 - El SPR está desarrollado en Java con Spring Boot, utilizando PostgreSQL como sistema gestor de base de datos y expone una API REST documentada mediante Swagger UI.
 
+**Autores**
+
+Andrea Alonso Dapena (Grupo 1 - Lunes)
+
+Lara Gonzalez Castro (Grupo 2 - Martes)
 
 ## Estructura del proyecto
 
@@ -41,7 +46,6 @@ src/
 │       └── dao/ -> Tests de los DAOs.
 
 │       └── ApplicationTests.java -> Test general de la aplicación.
-
 
 **Otros archivos destacados**
 
@@ -92,11 +96,11 @@ Parámetros principales:
 
 **1. Inicializar la base de datos**
 
-Ejecutar el script SQL de creación del esquema:
-
 ```bash
 mvn sql:execute
 ```
+
+Ejecuta el script SQL de creación del esquema.
 
 **2. Compilar el proyecto**
 
@@ -104,19 +108,19 @@ mvn sql:execute
 mvn clean install
 ```
 
-**3. Ejecutar la aplicación**
+Limpia archivos de compilación existentes, compila el proyecto y ejecuta tests.
 
-Levantar la aplicación en http://localhost:8080 :
+**3. Ejecutar la aplicación**
 
 ```bash
 mvn spring-boot:run
 ```
 
+Levanta la aplicación en http://localhost:8080
+
 **4. Adicional**
 
-Acceder a la documentación de la API poniendo en un navegador la siguiente URL http://localhost:8080/swagger-ui.html
-
-Revisar los logs en el archivo: `logs/app.log`
+Acceder a la documentación de la API en un navegador a través de la URL http://localhost:8080/swagger-ui.html
 
 ## Ejecución del proyecto en Bonita
 
@@ -136,15 +140,7 @@ Al pinchar en ejecutar se inicia una nueva instancia del proceso.
 
 **Usuarios de prueba**
 
-- Empleado (actor walter.bates)
-  Usuario: walter.bates
-  Contraseña: bpm
-  
-- Responsable de almacén (actor april.sanchez)
-  Usuario: april.sanchez
-  Contraseña: bpm
+* Empleado (actor walter.bates) -> *Usuario*: walter.bates *Contraseña*: bpm
+* Responsable de almacén (actor april.sanchez) -> *Usuario*: april.sanchez *Contraseña*: bpm
 
-**Nota**
-El API REST del sistema SPR (la aplicación Spring Boot) debe estar corriendo en http://localhost:8080 para que Bonita pueda realizar las peticiones necesarias.
-
-
+**Nota:** El API REST del sistema SPR (la aplicación Spring Boot) debe estar corriendo en http://localhost:8080 para que Bonita pueda realizar las peticiones necesarias.

@@ -85,7 +85,8 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(sku, product.sku) &&
+        return Objects.equals(id, product.id) &&
+                Objects.equals(sku, product.sku) &&
                 Objects.equals(nombre, product.nombre) &&
                 Objects.equals(tipo, product.tipo) &&
                 Objects.equals(proveedor, product.proveedor);

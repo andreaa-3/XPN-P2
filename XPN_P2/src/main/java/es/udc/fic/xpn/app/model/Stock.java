@@ -3,6 +3,8 @@ package es.udc.fic.xpn.app.model;
 import static es.udc.fic.xpn.app.model.ModelConstants.MAX_STOCK_BY_DEFECT;
 import static es.udc.fic.xpn.app.model.ModelConstants.MIN_STOCK_BY_DEFECT;
 
+import java.util.Objects;
+
 public class Stock {
     private Long id;
     private Long stock;
@@ -86,5 +88,22 @@ public class Stock {
                 ", idAlmacen= " + idAlmacen + 
                 ", idProducto= "+ idProducto +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Stock that = (Stock) o;
+        return Objects.equals(id, that.id) &&
+               Objects.equals(stock, that.stock) &&
+               Objects.equals(maxStock, that.maxStock) &&
+               Objects.equals(minStock, that.minStock) &&
+               Objects.equals(idAlmacen, that.idAlmacen) &&
+               Objects.equals(idProducto, that.idProducto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, stock, maxStock, minStock, idAlmacen, idProducto);
     }
 }

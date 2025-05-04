@@ -37,6 +37,7 @@ public class ProductController {
     @Autowired
     private StockService stockService;
 
+    // Obtiene el nombre de un almacén por su id.
     private ResponseEntity<String> obtenerNombre(Long idAlmacen) {
         Optional<Almacen> a = almacenService.findById(idAlmacen);
         if (!a.isPresent())
@@ -44,48 +45,51 @@ public class ProductController {
         return ResponseEntity.ok(a.get().getNombre());
     }
 
+    // Busca el destino más favorable (menor stock de un producto) que no sea el del almacén pasado como parámetro.
     @GetMapping("/findDestinations")
     public ResponseEntity<String> findDestinations (@RequestParam("sku") String sku, @RequestParam("almacen") String almacen) {
-        // Obtener el producto (para saber el productId)
+        // Obtener el producto (para saber el productId).
         Optional<Product> p = productService.find(sku);
         if (!p.isPresent())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado");
         
-        // Obtener la lista de stock del producto
+        // Obtener la lista de stock del producto.
         List<Stock> stocks = stockService.findStocks(p.get().getId());
         if (stocks == null || stocks.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado en ningún almacén");
     
-        // Crear una lista de idAlmacen ordenada de menor a mayor stock
+        // Crear una lista de idAlmacen ordenada de menor a mayor stock.
         List<Long> almacenes = stocks.stream()
                 .sorted(Comparator.comparing(Stock::getStock))
                 .map(Stock::getIdAlmacen)
                 .collect(Collectors.toList());
         
-        // Obtener el almacen (para saber el idAlmacen)
+        // Obtener el almacen (para saber el idAlmacen).
         Optional<Almacen> a = almacenService.find(almacen);
         if (!a.isPresent())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Almacen no encontrado");
         
         // Devolver el almacen con menor stock
-        if (almacenes.get(0).equals(a.get().getId())) { // Si el que tiene menor stock es el propio almacen
-            if (almacenes.size() == 1) // Si solo hay 1 almacen con ese producto, error
+        if (almacenes.get(0).equals(a.get().getId())) { // Si el que tiene menor stock es el propio almacen.
+            if (almacenes.size() == 1) // Si solo hay 1 almacen con ese producto, error.
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado en ningún otro almacén");
-            return obtenerNombre(almacenes.get(1)); // Si no, devolver el siguiente
+            return obtenerNombre(almacenes.get(1)); // Si no, devolver el siguiente.
         }
-        return obtenerNombre(almacenes.get(0)); // Devolver el primero
+        return obtenerNombre(almacenes.get(0)); // Devolver el primero.
     }
     
 
+    // Crea el stock para el almacén, producto y cantidad especificados.
     private ResponseEntity<Void> createStock (Long cantidad, Long idAlmacen, Long idProduct) {
-        // Crear el stock
+        // Crear el stock.
         stockService.save(new Stock(cantidad, idAlmacen, idProduct));
 
-        // Devolver el código 201 (Created)
+        // Devolver el código 201 (Created).
         return new ResponseEntity<>(HttpStatus.CREATED);
     } 
 
 
+    // Crea el stock para el producto y su stock en el almacén pasados como parámetros.
     private ResponseEntity<Void> createProduct(ProductDto productDto, Long idAlmacen) {
         // Crear el producto
         ProductDto p = ProductMapper.entityToDto(
@@ -95,15 +99,17 @@ public class ProductController {
         return createStock(productDto.getCantidad(), idAlmacen, p.getId());
     }
 
+    // Actualiza la cantidad especificada en el stock.
     private ResponseEntity<Void> update(Stock stock, Long cantidad) {
-        // Actualizar la cantidad del stock actual
+        // Actualizar la cantidad del stock actual.
         stock.setStock(stock.getStock() + cantidad);
         stockService.update(stock);
 
-        // Devuelve el código 200 (OK) con el DTO
+        // Devuelve el código 200 (OK) con el DTO.
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Actualiza el stock de un producto en un almacén. En caso de no existir, los crea.
     @PostMapping
     public ResponseEntity<Void> updateStock (@RequestBody ProductDto productDto) {
         // Obtener el almacen.
@@ -135,21 +141,26 @@ public class ProductController {
         return update(s.get(), productDto.getCantidad());
     }
 
+    // Devuelve el stock actual de un prodycto en un almacén.
     @GetMapping("/actualStock")
     public ResponseEntity<?> actualStock (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
         return getStock(sku, almacen, false, false);
     }
 
+    // Devuelve el stock máximo de un prodycto en un almacén.
     @GetMapping("/maxStock")
     public ResponseEntity<?> overStock (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
         return getStock(sku, almacen, true, false);
     }
 
+    // Devuelve el stock mínimo de un prodycto en un almacén.
     @GetMapping("/minStock")
     public ResponseEntity<?> underStock (@RequestParam(value="sku") String sku, @RequestParam(value="almacen") String almacen) {
         return getStock(sku, almacen, false, true);
     }
 
+    // Realiza las comprobaciones necesarias para devolver un Stock.
+    // Opciones: max -> stock máximo, min -> stock mínimo, ninguno de los dos -> stock actual.
     private ResponseEntity<?> getStock (String sku, String almacen, boolean max, boolean min) {
         // Obtener el producto por SKU (para saber si id).
         Optional<Product> p = productService.find(sku);

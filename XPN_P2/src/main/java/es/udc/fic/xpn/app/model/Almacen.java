@@ -1,5 +1,7 @@
 package es.udc.fic.xpn.app.model;
 
+import java.util.Objects;
+
 public class Almacen{
     private Long id;
     private String nombre;
@@ -40,4 +42,17 @@ public class Almacen{
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Almacen almacen = (Almacen) o;
+        return Objects.equals(id, almacen.id) &&
+                Objects.equals(nombre, almacen.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre);
+    }
 }
