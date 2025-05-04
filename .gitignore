@@ -1,11 +1,9 @@
 /target/
+/logs/
 *.class
 *.jar
 .idea/
 *.iml
-
-### LOGS ###
-/logs/
 
 ### IntelliJ IDEA ###
 out/
